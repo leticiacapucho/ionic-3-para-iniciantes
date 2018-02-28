@@ -14,41 +14,66 @@
 
 
 <ion-content padding>
+  <!--
   <div>
     <h1>Nome do Usuário</h1>
-  </div>
-    <ion-card>
+  </div> 
+-->
+    
+<ion-card *ngFor="let filme of lista_filmes"> 
+  
+  <!-- *ngFor é uma diretiva (o * mexe com a estrutura da página html) do angular 
+    
+      let filme (criei uma variavel o let cria uma variavel, ou let ou const)
+    
+      lista_filmes (peguei no meu feed.ts)
+
+      let filme of lista_filmes - quando tiver filmes na minha lista de filmes, ele vai repetir esse ion-card 
+      pela quantidade de itens que tiver na minha lista filmes.
+  -->
 
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/imgs/avatar.png">
       </ion-avatar>
-     <h2 class="feed_title">{{objeto_feed.titulo}}</h2> <!-- Sem o ponto, acessa a variável direta. Como quero chamar o meu objeto, eu utilizo o ponto para acessar a propriedade do objeto-->
-      <p class="feed_date">{{objeto_feed.data}}</p> <!-- é feito isso da interpolação, para que o angular entenda que tem typeScript no meu código -->
+      <h2 class="feed_title">{{ filme.original_title }}</h2> <!-- original_title, é o titulo original do filme, que fica em https://developers.themoviedb.org/3/movies/get-popular-movies -->
+     <p class="feed_date"> {{ filme.release_date }}</p>
+    <!--
+
+     <h2 class="feed_title">{{objeto_feed.titulo}}</h2> ( Sem o ponto, acessa a variável direta. Como quero chamar o meu objeto, eu utilizo o ponto para acessar a propriedade do objeto)
+      <p class="feed_date">{{objeto_feed.data}}</p>  (é feito isso da interpolação, para que o angular entenda que tem typeScript no meu código)
+      
+      -->
     </ion-item>
 
-    <img src="assets/imgs/feed_image.png">
+    <img [src]="'https://image.tmdb.org/t/p/w200/' + filme.backdrop_path"> 
+    
+    <!-- Esta fazendo um bind na propriedade src que é pra usar a variavel
+    https://image.tmdb.org/t/p/w500 - aqui é demonstrado o tamanho da imagem, no caso aqui é 500
+    -->
+    <!-- <img src="assets/imgs/feed_image.png"> -->
 
     <ion-card-content>
-      <p>{{objeto_feed.descricao}}</p>
+      <p>{{ filme_overview }}</p>
+  <!--  <p>{{objeto_feed.descricao}}</p> -->
     </ion-card-content>
 
     <ion-row>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="thumbs-up"></ion-icon>
-          <div>{{objeto_feed.qntd_likes}} Likes</div>
+          <div>{{ objeto_feed.qntd_likes }} Likes</div>
         </button>
       </ion-col>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="text"></ion-icon>
-          <div>{{objeto_feed.qnts_comments}}4 Comments</div>
+          <div>{{ objeto_feed.qnts_comments }}4 Comments</div>
         </button>
       </ion-col>
       <ion-col center text-center>
         <ion-note>
-          {{objeto_feed.time_comment}}
+          {{ objeto_feed.time_comment }}
         </ion-note>
       </ion-col>
     </ion-row>
