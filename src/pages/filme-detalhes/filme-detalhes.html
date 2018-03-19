@@ -1,0 +1,64 @@
+<!--
+  Generated template for the FilmeDetalhesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>filmeDetalhes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card *ngIf="filme"> <!-- Só quero que o meu card apareça, quando a minha variavel
+       filme existir.
+
+       quando coloco *ngIf="filme" quer dizer se o meu "filme" retornar um valor, vai entender que
+       tá certo esse meu *ngIf. Se não, retornar nenhum valor ele não abre as tags abaixo e devolve nulo
+    
+    -->
+
+        <!-- *ngFor é uma diretiva (o * mexe com a estrutura da página html) do angular 
+        
+          let filme (criei uma variavel o let cria uma variavel, ou let ou const)
+        
+          lista_filmes (peguei no meu feed.ts)
+    
+          let filme of lista_filmes - quando tiver filmes na minha lista de filmes, ele vai repetir esse ion-card 
+          pela quantidade de itens que tiver na minha lista filmes.
+      -->
+    
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="assets/imgs/avatar.png">
+          </ion-avatar>
+          <h2 class="feed_title">{{ filme.original_title }}</h2>
+          <!-- original_title, é o titulo original do filme, que fica em https://developers.themoviedb.org/3/movies/get-popular-movies -->
+          <p class="feed_date"> {{ filme.release_date }}</p>
+          <!--
+    
+         <h2 class="feed_title">{{objeto_feed.titulo}}</h2> ( Sem o ponto, acessa a variável direta. Como quero chamar o meu objeto, eu utilizo o ponto para acessar a propriedade do objeto)
+          <p class="feed_date">{{objeto_feed.data}}</p>  (é feito isso da interpolação, para que o angular entenda que tem typeScript no meu código)
+          
+          -->
+        </ion-item>
+    
+        <img [src]="'https://image.tmdb.org/t/p/w200/' + filme.backdrop_path">
+    
+        <!-- Esta fazendo um bind na propriedade src que é pra usar a variavel
+        https://image.tmdb.org/t/p/w500 - aqui é demonstrado o tamanho da imagem, no caso aqui é 500
+        -->
+        <!-- <img src="assets/imgs/feed_image.png"> -->
+    
+        <ion-card-content>
+          <p>{{ filme_overview }}</p>
+    
+          <!--  <p>{{objeto_feed.descricao}}</p> -->
+        </ion-card-content>
+        
+      </ion-card>
+</ion-content>

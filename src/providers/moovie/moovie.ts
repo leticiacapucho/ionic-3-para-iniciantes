@@ -20,10 +20,10 @@ export class MoovieProvider {
   }
   
   //método para solicitar informação
-  getLatestMovies(){
+  getLatestMovies(page = 1){
     //esse http no caso, é o objeto. No qual eu tenho funções e propriedades
    
-    return this.http.get(this.baseApiPath + '/movie/popular?api_key=' + this.getApiKey()); 
+    return this.http.get(this.baseApiPath + `/movie/popular?page=${page}&api_key=` + this.getApiKey()); // quando compara uso crase
    
     /* ou eu poderia deixar tudo aqui https://api.themoviedb.org/3 //movie/popular
     porém como todas as variáveis vem depois dessa https://api.themoviedb.org/3, utilizarei dessa forma pra colocar o this.baseApiPath
@@ -33,6 +33,11 @@ export class MoovieProvider {
     
     - pode usar o this.getApiKey ou deixar tudo em um "/movie/popular?api_key=api_key");
     */
+  }
+
+  getMovieDetails(filmeid){
+       
+    return this.http.get(this.baseApiPath + `/movie/${filmeid}?api_key=` + this.getApiKey());
   }
 
   getApiKey(): string{
